@@ -1,0 +1,36 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page d'Accueil</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_home.css') }}">
+</head>
+<body>
+    <div class="header">
+        <a href="/home">Home</a>
+        <a href="/home?page=page1">Page 1</a>
+        <a href="/home?page=page2">Page 2</a>
+        <a href="/admin">Gestion</a>
+        <a href="/logout">Déconnexion</a>
+    </div>
+    <div class="main-content">
+        <div class="filters">
+            <h2>Filtres</h2>
+            <form method="get" action="{{ url_for('home') }}">
+                <input type="hidden" name="page" value="{{ request.args.get('page', '') }}">
+                <label for="data-range">Plage de données:</label>
+                <select name="data_range" id="data-range">
+                    <option value="10" {% if request.args.get('data_range', '10') == '10' %}selected{% endif %}>1-10</option>
+                    <option value="20" {% if request.args.get('data_range', '20') == '20' %}selected{% endif %}>1-20</option>
+                    <option value="30" {% if request.args.get('data_range', '30') == '30' %}selected{% endif %}>1-30</option>
+                </select>
+                <input type="submit" value="Appliquer les filtres">
+            </form>
+        </div>
+        <div class="content">
+            <iframe id="graphFrame" src="{{ image }}"></iframe>
+        </div>
+    </div>
+</body>
+</html>

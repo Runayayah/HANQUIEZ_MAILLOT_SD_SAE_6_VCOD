@@ -1,0 +1,104 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('/static/images/font.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* légère transparence */
+    color: white;
+    padding: 20px 0; /* Padding vertical */
+    text-align: center;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre horizontalement les éléments */
+    justify-content: center; /* Centre verticalement les éléments */
+    background-color: rgba(0, 0, 0, 0.8); /* Fond plus opaque pour le formulaire */
+    padding: 40px;
+    border-radius: 8px;
+    width: 340px;
+    margin: auto; /* Centre le conteneur sur la page */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+form{
+    color: black;
+}
+
+input[type="text"], input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    margin: 10px 0;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+header {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center; /* Aligne le texte et les éléments à gauche */
+    display: flex; /* Utilise flexbox pour aligner les éléments de l'en-tête */
+    align-items: center; /* Centre les éléments verticalement */
+}
+
+#ministry-logo {
+    width: 100px; /* Ajuste la taille du logo si nécessaire */
+    margin-right: 20px; /* Maintient un espace entre le logo et le texte */
+    margin-left: 20px; /* Ajoute un espace à gauche pour décoller le logo du bord */
+}
+
+h1 {
+    flex-grow: 0.75; /* Permet au texte de prendre toute la largeur disponible */
+    text-align: center; /* Centre le texte */
+    font-size: 1.8em; /* Ajuste la taille du texte pour l'harmonie visuelle */
+}
+
+

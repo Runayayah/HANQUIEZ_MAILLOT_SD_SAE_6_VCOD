@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - Ministère</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_login.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/logo-ministere.jpg') }}" alt="Logo du Ministère" id="ministry-logo">
+        <h1>Crimes et délits en France depuis 2016, Ministère de l'Intérieur et des Outre-Mer</h1>
+    </header>
+
+
+    <div class="login-container">
+        <h2>Mon espace</h2>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit" value="Login">Connexion</button>
+        </form>
+        <p class="signup">Vous n'avez pas de compte ? <a href="/register">Créez un compte.</a></p>
+    </div>
+
+    <footer>
+        © 2024 Lucien Hanquiez & Elsa Maillot. Tout droits réservés.
+    </footer>
+</body>
+</html>

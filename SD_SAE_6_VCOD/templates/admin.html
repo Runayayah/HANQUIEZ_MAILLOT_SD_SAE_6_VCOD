@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page d'Administration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #e1e1e1;
+            border-radius: 4px;
+        }
+        a {
+            text-decoration: none;
+            color: darkblue;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Page d'Administration</h1>
+        <p>Bienvenue, {{ current_user.username }}. Vous avez accès aux fonctionnalités administratives.</p>
+        <ul>
+            <li>Gérer les utilisateurs</li>
+            <li>Configurer les paramètres du site</li>
+            <li>Voir les logs d'activité</li>
+        </ul>
+        <p><a href="/home">Retour à la page d'accueil</a></p>
+        <p><a href="/logout">Déconnexion</a></p>
+    </div>
+</body>
+</html>
