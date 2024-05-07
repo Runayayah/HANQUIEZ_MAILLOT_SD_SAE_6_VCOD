@@ -17,5 +17,5 @@ Pour accèder à notre WebApp, voici un guide étape par étape ci-dessous :
 - Sur le terminal, l'adresse de la WebApp va s'afficher : http:/127.0.0.1:5000
 
 Si vous rencontrez le moindre problème de lancement de la WebApp, nous sommes disponible aux adresses mails suivante :
-elsa.maillot@univ-lyon2.fr
+elsa.maillot@univ-lyon2.fr;
 lucien.hanquiez@univ-lyon2.fr
