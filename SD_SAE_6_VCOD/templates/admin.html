@@ -3,51 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Page d'Administration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f9;
-        }
-        h1 {
-            color: #333;
-        }
-        .content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            padding: 8px;
-            margin-top: 10px;
-            background-color: #e1e1e1;
-            border-radius: 4px;
-        }
-        a {
-            text-decoration: none;
-            color: darkblue;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_admin.css') }}">
 </head>
 <body>
     <div class="content">
         <h1>Page d'Administration</h1>
         <p>Bienvenue, {{ current_user.username }}. Vous avez accès aux fonctionnalités administratives.</p>
-        <ul>
-            <li>Gérer les utilisateurs</li>
-            <li>Configurer les paramètres du site</li>
-            <li>Voir les logs d'activité</li>
-        </ul>
-        <p><a href="/home">Retour à la page d'accueil</a></p>
-        <p><a href="/logout">Déconnexion</a></p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Rôle</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    <form action="{{ url_for('update_role', user_id=user.id) }}" method="post">
+                        <select name="role" onchange="this.form.submit()">
+                            <option value="user" {% if user.role == 'user' %}selected{% endif %}>User</option>
+                            <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('update_status', user_id=user.id) }}" method="post">
+                        <select name="status" onchange="this.form.submit()">
+                            <option value="non_approuve" {% if user.status == 'non_approuve' %}selected{% endif %}>Non approuvé</option>
+                            <option value="approuve" {% if user.status == 'approuve' %}selected{% endif %}>Approuvé</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur?');">
+                        <button type="submit" class="btn btn-delete">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="btn-group">
+            <a href="/home" class="btn btn-back">Retour à la page d'accueil</a>
+            <a href="/logout" class="btn btn-logout">Déconnexion</a>
+        </div>
     </div>
 </body>
 </html>

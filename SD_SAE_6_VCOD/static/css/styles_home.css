@@ -1,62 +1,158 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
+    background: url('/static/images/font.jpeg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent scroll on the body */
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-.header {
-    background-color: #2c3e50; /* Dark blue background */
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: fixed; /* Fixed header at the top */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    z-index: 1000;
+    height: 100%;
+    background: url('/static/images/font.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    z-index: -2;
 }
 
-.main-content {
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    width: 100%;
     display: flex;
-    flex-grow: 1; /* Take up all available space */
-    padding-top: 50px; /* Offset for the header height */
-    height: calc(100vh - 50px); /* Remaining height */
-    overflow: hidden; /* Prevent scroll within main content */
+    justify-content: space-around;
+    align-items: center;
+    padding: 14px 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.filters {
-    width: 200px;
-    background-color: #ccc;
+.nav-link {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.nav-link:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 70px); /* Adjust based on navbar height */
+    margin-top: 20px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.filters-page1, .filters-page2 {
+    width: 20%;
     padding: 20px;
-    overflow-y: auto; /* Only allow vertical scroll inside filters if needed */
-    height: 100%; /* Extend to full available height */
-    box-sizing: border-box; /* Include padding in width and height */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    height: calc(90vh - 110px); /* Adjust based on navbar and margin height */
 }
 
-.content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+.filters-page1 h2, .filters-page2 h2 {
+    color: white;
+    text-align: center;
 }
 
-iframe {
-    max-width: 100%; /* Adjust width to 100% of the parent container */
-    height: auto; /* Adjust height automatically */
-    border: none;
-}
-
-form {
+.filters-page1 form, .filters-page2 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
-select, input[type="submit"] {
+.filters-page1 label, .filters-page2 label {
+    margin: 10px 0 5px;
+}
+
+.filters-page1 select, .filters-page2 select, .filters-page1 input[type="submit"], .filters-page2 input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.filters-page1 input[type="submit"], .filters-page2 input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.filters-page1 input[type="submit"]:hover, .filters-page2 input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.content-page1, .content-page2 {
+    width: 75%;
+    padding: 20px;
+}
+
+.content-home {
+    text-align: center;
+    padding: 50px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin: 20px;
+}
+
+.graphs-container-page2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.graph-box-page2 {
+    width: 48%;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+th, td {
+    border: 1px solid #ddd;
     padding: 8px;
-    width: 100%; /* Make select and button use all available space */
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: black;
 }

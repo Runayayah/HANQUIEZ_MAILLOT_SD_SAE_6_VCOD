@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <title>Connexion - Ministère</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_login.css') }}">
+    <style>
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <header>
         <img src="{{ url_for('static', filename='images/logo-ministere.jpg') }}" alt="Logo du Ministère" id="ministry-logo">
         <h1>Crimes et délits en France depuis 2016, Ministère de l'Intérieur et des Outre-Mer</h1>
     </header>
-
 
     <div class="login-container">
         <h2>Mon espace</h2>
@@ -20,10 +25,31 @@
             <button type="submit" value="Login">Connexion</button>
         </form>
         <p class="signup">Vous n'avez pas de compte ? <a href="/register">Créez un compte.</a></p>
+        <p class="error-message" id="errorMessage">Mot de passe incorrect</p>
     </div>
 
     <footer>
-        © 2024 Lucien Hanquiez & Elsa Maillot. Tout droits réservés.
+        © 2024 Lucien Hanquiez & Elsa Maillot. Tous droits réservés.
     </footer>
+
+    <script>
+        function showError() {
+            var errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'block';
+            setTimeout(function() {
+                errorMessage.style.display = 'none';
+            }, 2000);
+        }
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        showError();
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
 </body>
 </html>
