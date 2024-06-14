@@ -1,36 +1,111 @@
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Page d'Accueil</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_home.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var flashMessage = "{{ get_flashed_messages(category_filter=['error'])[0] if get_flashed_messages(category_filter=['error']) else '' }}";
+            if (flashMessage) {
+                alert(flashMessage);
+            }
+        });
+    </script>
 </head>
 <body>
-    <div class="header">
-        <a href="/home">Home</a>
-        <a href="/home?page=page1">Page 1</a>
-        <a href="/home?page=page2">Page 2</a>
-        <a href="/admin">Gestion</a>
-        <a href="/logout">Déconnexion</a>
+    <div class="navbar">
+        <div class="navbar-container">
+            <a href="/home" class="nav-link">Home</a>
+            <a href="/home?page=page1" class="nav-link">Carte de France</a>
+            <a href="/home?page=page2" class="nav-link">Graphiques descriptif</a>
+            <a href="/admin" class="nav-link">Gestion</a>
+            <a href="/logout" class="nav-link">Déconnexion</a>
+        </div>
     </div>
-    <div class="main-content">
-        <div class="filters">
+
+    {% if page == 'page1' %}
+    <div class="container">
+        <div class="filters-page1">
             <h2>Filtres</h2>
             <form method="get" action="{{ url_for('home') }}">
-                <input type="hidden" name="page" value="{{ request.args.get('page', '') }}">
-                <label for="data-range">Plage de données:</label>
-                <select name="data_range" id="data-range">
-                    <option value="10" {% if request.args.get('data_range', '10') == '10' %}selected{% endif %}>1-10</option>
-                    <option value="20" {% if request.args.get('data_range', '20') == '20' %}selected{% endif %}>1-20</option>
-                    <option value="30" {% if request.args.get('data_range', '30') == '30' %}selected{% endif %}>1-30</option>
+                <input type="hidden" name="page" value="page1">
+                <label for="annee_page1">Année:</label>
+                <select name="annee_page1" id="annee_page1">
+                    {% for annee in annees %}
+                    <option value="{{ annee }}" {% if annee == selected_annee %}selected{% endif %}>{{ annee }}</option>
+                    {% endfor %}
+                </select>
+                <label for="classe">Classe:</label>
+                <select name="classe" id="classe">
+                    <option value="" {% if not selected_classe %}selected{% endif %}>Toutes</option>
+                    {% for classe in classes %}
+                    <option value="{{ classe }}" {% if classe == selected_classe %}selected{% endif %}>{{ classe }}</option>
+                    {% endfor %}
                 </select>
                 <input type="submit" value="Appliquer les filtres">
             </form>
         </div>
-        <div class="content">
-            <iframe id="graphFrame" src="{{ image }}"></iframe>
+        <div class="content-page1">
+            <iframe src="{{ url_for('map_view') }}" width="100%" height="600px"></iframe>
         </div>
     </div>
+    {% elif page == 'page2' %}
+    <div class="container">
+        <div class="filters-page2">
+            <h2>Filtres</h2>
+            <form method="post" action="{{ url_for('home', page='page2') }}">
+                <label for="annee_page2">Année:</label>
+                <select name="annee_page2" id="annee_page2">
+                    <option value="">Toutes</option>
+                    {% for annee in unique_annees %}
+                    <option value="{{ annee }}" {% if annee == selected_annee %}selected{% endif %}>{{ annee }}</option>
+                    {% endfor %}
+                </select>
+                <label for="departement">Département:</label>
+                <select name="departement" id="departement">
+                    <option value="">Tous</option>
+                    {% for departement in unique_departements %}
+                    <option value="{{ departement }}" {% if departement == selected_departement %}selected{% endif %}>{{ departement }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Appliquer les filtres">
+            </form>
+        </div>
+        <div class="content-page2">
+            <div class="graphs-container-page2">
+                {% for graph_div in graph_divs %}
+                <div class="graph-box-page2">
+                    {{ graph_div|safe }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="content-home">
+        <h1>Bienvenue sur la page d'accueil</h1>
+        <p>Cette application vous permet de visualiser des données sous forme de graphiques. Utilisez les liens ci-dessus pour accéder à différentes pages avec des graphiques et des filtres spécifiques.</p>
+    </div>
+
+    <div class="content-home">
+        <h2>Fichiers dans le dossier data</h2>
+        <table>
+            <tr>
+                <th>Nom du fichier</th>
+                <th>Extension</th>
+                <th>Télécharger</th>
+            </tr>
+            {% for file in files %}
+            <tr>
+                <td>{{ file.name }}</td>
+                <td>{{ file.extension }}</td>
+                <td><a href="{{ url_for('download_file', filename=file.path) }}">Télécharger</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
 </body>
 </html>

@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_register.css') }}">
 </head>
 <body>
-    <form method="post">
-        Username: <input type="text" name="username"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit" value="Register">
-    </form>
+    <div class="register-container">
+        <h2>Créer un compte</h2>
+        <form method="post">
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Register">
+        </form>
+        <p class="login-link">Vous avez déjà un compte ? <a href="/login">Connectez-vous ici.</a></p>
+    </div>
 </body>
 </html>

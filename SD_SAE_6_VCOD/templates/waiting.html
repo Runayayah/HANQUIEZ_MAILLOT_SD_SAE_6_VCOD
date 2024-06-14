@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Compte en attente</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles_waiting.css') }}">
+</head>
+<body>
+    <div class="content">
+        <h1>Compte en attente d'approbation</h1>
+        <p>Votre compte est en attente d'approbation par un administrateur. Vous recevrez un email une fois votre compte approuvé.</p>
+        <a href="{{ url_for('login') }}" class="btn">Retourner à la page de connexion</a>
+    </div>
+</body>
+</html>
